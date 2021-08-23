@@ -17,7 +17,7 @@ class CovidCase::Scraper
 
     def self.scrape_covid_stat(state)
         #CovidCase::Covid_info.new(state)
-        page = "nytimes.com#{state}"
+        page = "http://nytimes.com#{state}"
         doc = Nokogiri::HTML(open(page))
         doc.css(".covid-tracker").collect do |element|
             covid_hash = [

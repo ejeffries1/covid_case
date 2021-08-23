@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/covid_case"
+
+CovidCase::CLI.new.call

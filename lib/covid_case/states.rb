@@ -6,7 +6,7 @@ class CovidCase::States
     def initialize(name, state_url)
         @name = name
         @state_url = state_url
-        @@covid_array = []
+        @covid_array = []
         save
     end
 
@@ -15,10 +15,12 @@ class CovidCase::States
         @@all
     end
 
-    def get_state_stat
-        CovidCase::Scraper.scrape_covid_stat(self.state_url) if @@covid_array.empty?
-        @@covid_array
+    def self.get_state_stat(state_url)
+        CovidCase::Scraper.scrape_covid_stat(state_url)
+        #binding.pry
+        @covid_array
     end
+
 
     def save
         @@all << self

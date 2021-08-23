@@ -16,17 +16,18 @@ class CovidCase::Scraper
     end
 
     def self.scrape_covid_stat(state)
-        #CovidCase::Covid_info.new(state)
         page = "http://nytimes.com#{state}"
+        #binding.pry
         doc = Nokogiri::HTML(open(page))
         doc.css(".covid-tracker").collect do |element|
-            covid_hash = [
+            #binding.pry
+            #covid_hash = [
             death = element.css(".num.deaths.svelte-6tbkhx")[2].text,
             cases = element.css(".num.cases.svelte-6tbkhx")[2].text,
             vaccinated = element.css(".num.vax.td-end")[0].text
-        ]
-            binding.pry
-            CovidCase::Covid_info.new(state)
+        #]
+        
+            CovidCase::Covid_info.new(state, death, cases, vaccinated)
         end
         #covid_hash
     end

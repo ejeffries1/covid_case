@@ -8,7 +8,6 @@ class CovidCase::CLI
         get_states
         list_states
         get_user_state
-        show_state_details
         #binding.pry
         #get_case(state)
     end
@@ -24,8 +23,8 @@ class CovidCase::CLI
     end
 
     def get_user_state
-        input = gets.strip.to_i
-        show_state_details(input)
+        chosen_state = gets.strip.to_i
+        show_state_details(chosen_state)
     end
 
     def valid_input(input)
@@ -33,12 +32,14 @@ class CovidCase::CLI
         @index <= @place.count && @index > 0
     end
 
-    def show_state_details(input)
-        location = @place[input-1]
-        location.get_state_stat
-        location.covid_array.each do |i|
-            puts i
-            binding.pry
+    def show_state_details(chosen_state)
+        location = @place[chosen_state-1]
+        CovidCase::States.get_state_stat(location.state_url)
+        CovidCase::Covid_info.all.each do |stat|
+            #binding.pry
+            puts "#{stat.death[2]}"
+            puts "#{stat.cases}"
+            puts "#{stat.vaccinated}"
         end
     end
 end

@@ -5,8 +5,8 @@ class CovidCase::CLI
         puts "Welcome to the Covid-Case CLI"
         puts "Please type the first letter of the state you would like to view or type list to view all states available."
         get_states
-        #list_states
-        get_user_input
+        get_user_choice
+        get_user_state
         #binding.pry
         #get_case(state)
     end
@@ -15,29 +15,25 @@ class CovidCase::CLI
         @place = CovidCase::States.all
     end
 
-    def get_user_input
-        @input = gets.strip
-        if @input == "list"
-            list_states
-            get_user_input
-        elsif @input == int.to_i > @place.count
-            get_user_state
-        else state.name.start_with?(input)
-            @place.select.with_index(1) do |state, index|
-                puts "#{index}. #{state.name}"
+    def get_user_choice
+        choice = gets.chomp
+        @place.each.with_index(1) do |x, index|
+            if x.name.start_with?(choice)
+                puts "#{index}. #{x.name.to_s}"
+            elsif choice == "list"
+                puts "#{index}. #{x.name}"
             end
         end
     end
 
-    def list_states
-        @place.each.with_index(1) do |state, index|
-                puts "#{index}. #{state.name}"
-        end
-    end
+    #def list_states(choice)
+    #    match = @place.select{ |state| state.name.match(@choice)}
+     #   puts match
+    #end
 
     def get_user_state
-        #@input = gets.strip.to_i
-        show_state_details(input)
+        @input = gets.chomp.to_i
+        show_state_details(@input)
     end
 
     #def valid_input(input)
@@ -58,7 +54,7 @@ class CovidCase::CLI
             puts "#########################################"
             puts "Please make another selection"
             puts "If you wish to exit, press n"
-            input = gets.strip
-            call unless input == "n"
+            #input = gets.strip
+            call unless @input == "n"
     end
 end

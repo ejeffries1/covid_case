@@ -17,7 +17,6 @@ class CovidCase::States
 
     def self.get_state_stat(state_url)
         CovidCase::Scraper.scrape_covid_stat(state_url)
-        #binding.pry
         @covid_array
     end
 

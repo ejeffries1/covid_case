@@ -7,7 +7,6 @@ class CovidCase::Covid_info
         @death = death
         @cases = cases
         @vaccinated = vaccinated
-        #add_to_state
         save
     end
 

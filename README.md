@@ -1,8 +1,7 @@
 # CovidCase
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/covid_case`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the Covid_case CLI gem! In this CLI you will install the cli using one of the installation options below. Run bin/covid_case the user will be prompted to type "list" for a selection of states to choose from or type the first letter of the state they wish to see. From there user will type the number listed next to the state they wish to see.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 

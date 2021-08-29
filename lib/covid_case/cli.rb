@@ -9,6 +9,7 @@ class CovidCase::CLI
         get_user_state
         #binding.pry
         #get_case(state)
+        finale
     end
 
     def get_states
@@ -22,14 +23,10 @@ class CovidCase::CLI
                 puts "#{index}. #{x.name.to_s}"
             elsif choice == "list"
                 puts "#{index}. #{x.name}"
+                #binding.pry
             end
         end
     end
-
-    #def list_states(choice)
-    #    match = @place.select{ |state| state.name.match(@choice)}
-     #   puts match
-    #end
 
     def get_user_state
         @input = gets.chomp.to_i
@@ -50,11 +47,15 @@ class CovidCase::CLI
             puts "Death ....................... #{stat.death[2]}"
             puts "Cases ....................... #{stat.cases}"
             puts "Vaccination ................. #{stat.vaccinated}"
-        end
             puts "#########################################"
             puts "Please make another selection"
             puts "If you wish to exit, press n"
             #input = gets.strip
-            call unless @input == "n"
+            #call until @input == "n"
+        end
+    end
+
+    def finale
+        puts "Thanks for using The Covid_case CLI!"
     end
 end

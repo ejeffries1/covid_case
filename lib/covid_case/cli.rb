@@ -7,9 +7,8 @@ class CovidCase::CLI
         get_states
         get_user_choice
         get_user_state
-        #binding.pry
         #get_case(state)
-        finale
+        #finale
     end
 
     def get_states
@@ -44,9 +43,10 @@ class CovidCase::CLI
         CovidCase::Covid_info.all.each do |stat|
             puts "Here are your results for #{location.name}"
             puts "#########################################"
-            puts "Death ....................... #{stat.death[2]}"
+            puts "Death ....................... #{stat.death}"
             puts "Cases ....................... #{stat.cases}"
             puts "Vaccination ................. #{stat.vaccinated}"
+            puts "Tested....................... #{stat.tested}"
             puts "#########################################"
             puts "Please make another selection"
             puts "If you wish to exit, press n"

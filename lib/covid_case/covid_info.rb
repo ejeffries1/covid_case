@@ -1,12 +1,13 @@
 class CovidCase::Covid_info
-    attr_accessor :state, :death, :cases, :vaccinated
+    attr_accessor :state, :death, :cases, :vaccinated, :tested
    
     @@all = []
-    def initialize(state, death, cases, vaccinated)
+    def initialize(state, death, cases, vaccinated, tested)
         @state = state
         @death = death
         @cases = cases
         @vaccinated = vaccinated
+        @tested = tested
         save
     end
 

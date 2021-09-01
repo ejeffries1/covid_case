@@ -1,5 +1,7 @@
 class CovidCase::Scraper
     attr_accessor :states_info
+require 'selenium-webdriver'
+
 
     def self.scrape_states
         doc = Nokogiri::HTML(open("https://coronavirus.jhu.edu/region"))
@@ -13,14 +15,23 @@ class CovidCase::Scraper
     end
 
     def self.scrape_covid_stat(state)
-        page = Nokogiri::HTML(open("https://coronavirus.jhu.edu#{state}"))
-        doc = page.css(".RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L")
-        doc.collect do |element|
-            death = element.css("span").children.text
-            #cases = element.css(".num.cases.svelte-6tbkhx")[2].text,
-            #vaccinated = element.css(".num.vax.td-end")[0].text
-            #CovidCase::Covid_info.new(state, death, cases, vaccinated)
-            binding.pry
-        end
+        wait = Selenium::WebDriver::Wait.new(:timeout => 15)
+        driver = Selenium::WebDriver.for :chrome
+        begin
+            # Navigate to URL
+            driver.get "https://coronavirus.jhu.edu#{state}"
+          
+          ensure
+            #driver.quit
+          end
+        ele = wait.until { driver.find_element(css: '.RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L')}
+            #inn = ele.text
+            death = ele.text.split("\n")[8]
+            cases = ele.text.split("\n")[6]
+            vaccinated = ele.text.split("\n")[18]
+            tested = ele.text.split("\n")[10]
+            CovidCase::Covid_info.new(state, death, cases, vaccinated, tested)
+            #binding.pry
+        #end
     end
 end

@@ -15,7 +15,7 @@ class CovidCase::Covid_info
         @@all
     end
 
-    def add_to_state
+    def self.add_to_state
         @state.covid_array << self unless @state.covid_array.include?(self)
     end
 

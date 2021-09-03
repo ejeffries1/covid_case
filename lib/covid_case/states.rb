@@ -1,12 +1,12 @@
 class CovidCase::States
-    attr_accessor :name, :state_url, :covid_array
+    attr_accessor :name, :state_url #:covid_array
 
     @@all = []
     
     def initialize(name, state_url)
         @name = name
         @state_url = state_url
-        @covid_array = []
+        #@covid_array = []
         save
     end
 
@@ -17,7 +17,7 @@ class CovidCase::States
 
     def self.get_state_stat(state_url)
         CovidCase::Scraper.scrape_covid_stat(state_url)
-        @covid_array
+        #@covid_array
     end
 
 

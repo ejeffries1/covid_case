@@ -15,23 +15,18 @@ require 'selenium-webdriver'
     end
 
     def self.scrape_covid_stat(state)
-        wait = Selenium::WebDriver::Wait.new(:timeout => 15)
+        wait = Selenium::WebDriver::Wait.new(:timeout => 1)
         driver = Selenium::WebDriver.for :chrome
         begin
-            # Navigate to URL
             driver.get "https://coronavirus.jhu.edu#{state}"
-          
-          ensure
+          #ensure
             #driver.quit
           end
         ele = wait.until { driver.find_element(css: '.RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L')}
-            #inn = ele.text
             death = ele.text.split("\n")[8]
             cases = ele.text.split("\n")[6]
             vaccinated = ele.text.split("\n")[18]
             tested = ele.text.split("\n")[10]
             CovidCase::Covid_info.new(state, death, cases, vaccinated, tested)
-            #binding.pry
-        #end
     end
 end

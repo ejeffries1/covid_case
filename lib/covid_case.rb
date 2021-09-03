@@ -11,8 +11,8 @@ require 'selenium-webdriver'
 require 'nokogiri'
 require 'pry'
 require 'open-uri'
-require 'httparty'
-require 'json'
+#require 'httparty'
+#require 'json'
 
 
 module CovidCase

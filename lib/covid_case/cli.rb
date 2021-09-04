@@ -13,7 +13,7 @@ class CovidCase::CLI
     end
 
     def get_states
-        @place = CovidCase::States.all
+        @states = CovidCase::States.all
     end
 
     def get_user_choice
@@ -30,25 +30,29 @@ class CovidCase::CLI
     def get_user_state
         @input = gets.strip.to_i
         show_state_details(@input) if valid_input(@input)
+        #binding.pry
     end
 
     def valid_input(input)
         @index = input.to_i
-        @index <= @place.count && @index > 0
+        @index <= @states.count && @index > 0
     end
 
     def show_state_details(input)
-        location = @place[input-1]
-        CovidCase::States.get_state_stat(location.state_url)
-        CovidCase::Covid_info.all.each do |stat|
-            puts "Here are your results for #{location.name}"
+        state = @states[input-1]
+        state.get_state_stats
+        state.stats.each do |stat|
+            #binding.pry
+            puts "#{stat}"
+            puts "Here are your results for #{state.name}"
             puts "#########################################"
-            puts "Death ....................... #{stat.death}"
-            puts "Cases ....................... #{stat.cases}"
-            puts "Vaccination ................. #{stat.vaccinated}"
-            puts "Tested....................... #{stat.tested}"
+            puts "Death ....................... #{stat.split("\n")[12]}"
+            puts "Cases ....................... #{stat.split("\n")[10]}"
+            puts "Vaccination ................. #{stat.split("\n")[32]}"
+            puts "Tested....................... #{stat.split("\n")[15]}"
             puts "#########################################"
             puts "Please make another selection"
+        #binding.pry
         end
     end
 

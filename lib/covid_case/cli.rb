@@ -19,7 +19,7 @@ class CovidCase::CLI
     def get_user_choice
         @choice = gets.chomp
         get_states.each.with_index(1) do |x, index|
-            if x.name.start_with?(@choice)
+            if x.name.start_with?(@choice.upcase)
                 puts "#{index}. #{x.name.to_s}"
             elsif @choice == "list"
                 puts "#{index}. #{x.name}"
@@ -30,7 +30,6 @@ class CovidCase::CLI
     def get_user_state
         @input = gets.strip.to_i
         show_state_details(@input) if valid_input(@input)
-        #binding.pry
     end
 
     def valid_input(input)
@@ -42,17 +41,16 @@ class CovidCase::CLI
         state = @states[input-1]
         state.get_state_stats
         state.stats.each do |stat|
-            #binding.pry
+            el = stat.split("\n")
             puts "#{stat}"
             puts "Here are your results for #{state.name}"
             puts "#########################################"
-            puts "Death ....................... #{stat.split("\n")[12]}"
-            puts "Cases ....................... #{stat.split("\n")[10]}"
-            puts "Vaccination ................. #{stat.split("\n")[32]}"
-            puts "Tested....................... #{stat.split("\n")[15]}"
+            puts "Death ....................... #{el[8]}"
+            puts "Cases ....................... #{el[6]}"
+            puts "Vaccination ................. #{el[18]}"
+            puts "Tested....................... #{el[10]}"
             puts "#########################################"
             puts "Please make another selection"
-        #binding.pry
         end
     end
 

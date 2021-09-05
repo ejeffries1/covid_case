@@ -20,12 +20,6 @@ class CovidCase::Scraper
             #driver.quit
           end
         ele = wait.until { driver.find_element(css: '.RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L')}
-            #death = ele.text.split("\n")[8]
-            #cases = ele.text.split("\n")[6]
-            #vaccinated = ele.text.split("\n")[18]
-            #tested = ele.text.split("\n")[10]
-            CovidCase::Covid_info.new(name, state)#death, cases, vaccinated, tested)
             state.stats << ele.text
-            #binding.pry
     end
 end

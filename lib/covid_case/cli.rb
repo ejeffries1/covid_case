@@ -42,7 +42,6 @@ class CovidCase::CLI
         state.get_state_stats
         state.stats.each do |stat|
             el = stat.split("\n")
-            puts "#{stat}"
             puts "Here are your results for #{state.name}"
             puts "#########################################"
             puts "Death ....................... #{el[8]}"
@@ -55,7 +54,7 @@ class CovidCase::CLI
     end
 
     def are_you_done
-        puts "If you wish to exit, press n"
+        puts "If you wish to exit, press n or type the first letter of the state you wish to view"
         @input = gets.strip
     end
 

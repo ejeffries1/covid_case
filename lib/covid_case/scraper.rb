@@ -12,14 +12,13 @@ class CovidCase::Scraper
     end
 
     def self.scrape_covid_stat(state)
-        wait = Selenium::WebDriver::Wait.new(:timeout => 1)
-        driver = Selenium::WebDriver.for :chrome
-        begin
-            driver.get "https://coronavirus.jhu.edu#{state.state_url}"
-          #ensure
-            #driver.quit
-          end
-        ele = wait.until { driver.find_element(css: '.RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L')}
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument('--headless')
+      driver = Selenium::WebDriver.for :chrome, options: options
+      driver.navigate.to "https://coronavirus.jhu.edu#{state.state_url}"
+      driver.manage.window.resize_to(800, 800)
+      driver.save_screenshot "intoli-screenshot.png"
+        ele =  driver.find_element(css: '.RegionOverview_mainSections__3DQD7.RegionOverview_noBorder__1yP6L')
             state.stats << ele.text
     end
 end
